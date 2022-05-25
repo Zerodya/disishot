@@ -1,7 +1,7 @@
 # TAOD - Temp Alert Over Discord
 **A bash script that sends you a Discord notification if your server is running too hot.**
 
-Works by using xsensors to check the temperature and [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) to send  the notification. Should be used with cron to periodically check if the temperature is too high.
+Works by using `xsensors` to check the temperature and [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) to send  the notification. Should be used with `cron` to periodically check if the temperature is too high.
 
 ## Dependencies
 - xsensors
