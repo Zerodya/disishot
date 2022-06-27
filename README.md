@@ -16,6 +16,11 @@ Edit the script:
 2. Choose a temperature treshold.
 3. Change the notification message (optional).
 
+Make the script executable and you're good to go:
+```
+chmod +x thisishot.sh
+```
+
 ## Cron job
 Add a line to your crontab to periodically run the script by using `crontab -e`.
 
