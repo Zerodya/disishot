@@ -5,18 +5,31 @@
 
 The variant [`disisfine.sh`](https://github.com/Zerodya/disishot/blob/main/disisfine.sh) works just the same but it sends a notification about the current temperature regardless of how hot the server is. Its intended use is to be able to quickly check the temperature at a glance so you better mute its Discord channel.
 
+TODO: automated configuration with prompts
+
 ## Dependencies
 - xsensors
 
 `apt install xsensors`
 
 ## Configuration
-Edit the script: 
-1. Add your Discord Webhook URL.
-2. Choose a temperature treshold.
-3. Change the notification message (optional).
+**This script is not meant to run as is. You need to configure it first.**
 
-Make the script executable and you're good to go:
+Edit the script:
+
+**Step 1.** Run `sensors` and choose which temperature to monitor.
+
+![alt text](https://github.com/Zerodya/disishot/blob/main/screenshot1.png?raw=true)
+
+In my case I want to monitor 'temp1', so I will be editing the variable in the script like this: `tempsensor=temp1`
+
+**Step 2.** Add your Discord Webhook URL.
+
+**Step 3.** Choose a temperature treshold.
+
+**Step 4.** Change the notification message (optional).
+
+Lastly, make the script executable and you're good to go:
 ```
 chmod +x thisishot.sh
 ```
