@@ -4,7 +4,7 @@
 url=https://discord.com/api/webhooks/XXXXXXXX/XXXXXXXXX
 
 # Which temperature to monitor (Run `sensors` to find which one you want to monitor)
-temptype="temp1"
+tempsensor="temp1"
 
 sensors | grep -e "$temptype" | while read line; do
         temp=$(echo $line | awk -F "+" '{ print $2 }' | awk -F "." '{ print $1 }');
