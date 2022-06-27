@@ -1,4 +1,4 @@
-# Dis is hot!
+# 🔥 Dis is hot!
 **A simple bash script that sends you a Discord notification whenever your server is running too hot.**
 
 [`disishot.sh`](https://github.com/Zerodya/disishot/blob/main/disishot.sh) works by using `xsensors` to check the temperature and [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) to send  the notification. To be used with `cron` to periodically check if the temperature is too high.
