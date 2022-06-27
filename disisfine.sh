@@ -2,6 +2,8 @@
 
 # Discord webhook URL
 url=https://discord.com/api/webhooks/XXXXXXXX/XXXXXXXXX
+
+# Which temperature to monitor (Run `sensors` to find which one you want to monitor)
 temptype="temp1"
 
 sensors | grep -e "$temptype" | while read line; do
