@@ -62,7 +62,7 @@ if [[ "$1" == "--config" ]]; then
 	
 	# Remind about cron
 	echo ">> It's all set! Run 'crontab -e' to run this script periodically. Here's an example of a cron job running every 5 minutes:"
-	echo "*/5 * * * * /path/to/disishot.sh"
+	echo "*/5 * * * * /path/to/disisfine.sh"
 
 	# Exits the configuration
 	exit 0
