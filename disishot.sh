@@ -44,7 +44,7 @@ if [[ "$1" == "--config" ]]; then
 		if [ -z "$(sensors | grep + | cut -d ":" -f1 | grep -w "$tempsensor")" ]; then
 			echo ">> This sensor was not found. Try again."; continue
 		else
-			echo "tempsensor=$tempsensor" >> $configfile;
+			echo "tempsensor=\"$tempsensor\"" >> $configfile;
 			break
 		fi
 	done
@@ -52,7 +52,7 @@ if [[ "$1" == "--config" ]]; then
 	# Add threshold variable
 	while true; do
 		read -p ">> Temperature threshold (number) for when to send the alert: " threshold
-		echo "threshold=$threshold" >> $configfile;
+		echo "threshold=\"$threshold\"" >> $configfile;
 		break
         done
 	
@@ -63,7 +63,7 @@ if [[ "$1" == "--config" ]]; then
                 if [ -z "$(echo $url | grep "https://discord.com/api/webhooks/")" ]; then
                         echo ">> The link provided is not correct. Try again."; continue
                 else
-                        echo "url=$url" >> $configfile;
+                        echo "url=\"$url\"" >> $configfile;
                         break
                 fi
         done
