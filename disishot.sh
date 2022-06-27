@@ -49,10 +49,10 @@ if [[ "$1" == "--config" ]]; then
 		fi
 	done
 
-	# Add treshold variable
+	# Add threshold variable
 	while true; do
-		read -p ">> Temperature treshold (number) for when to send the alert: " treshold
-		echo "treshold=$treshold" >> $configfile;
+		read -p ">> Temperature threshold (number) for when to send the alert: " threshold
+		echo "threshold=$threshold" >> $configfile;
 		break
         done
 	
@@ -77,7 +77,7 @@ if [[ "$1" == "--config" ]]; then
 fi
 
 # Sources the config file
-. $configfile
+. $dir/$configfile
 
 # Executes the actual script
 sensors | grep -e "$tempsensor" | while read line; do
