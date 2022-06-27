@@ -6,7 +6,10 @@ url=https://discord.com/api/webhooks/XXXXXXXX/XXXXXXXXX
 # Temperature threshold for when to send alert
 threshold=80
 
-sensors | grep -e "temp1" | while read line; do
+# Which temperature to monitor (Run `sensors` to find which one you want to monitor)
+temptype="temp1"
+
+sensors | grep -e "$temptype" | while read line; do
         temp=$(echo $line | awk -F "+" '{ print $2 }' | awk -F "." '{ print $1 }');
         
         # Alert message:
