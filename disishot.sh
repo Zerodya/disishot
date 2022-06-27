@@ -62,7 +62,7 @@ if [[ "$1" == "--config" ]]; then
 
 	# Add treshold variable
 	while true; do
-		read -p ">> Temperature treshold for when to send the alert: " treshold
+		read -p ">> Temperature treshold (number) for when to send the alert: " treshold
 		echo "treshold=$treshold" >> $configfile;
 		break
         done
