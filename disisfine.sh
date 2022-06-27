@@ -44,7 +44,7 @@ if [[ "$1" == "--config" ]]; then
 		if [ -z "$(sensors | grep + | cut -d ":" -f1 | grep -w "$tempsensor")" ]; then
 			echo ">> This sensor was not found. Try again."; continue
 		else
-			echo "tempsensor=$tempsensor" >> $configfile;
+			echo "tempsensor=\"$tempsensor\"" >> $configfile;
 			break
 		fi
 	done
@@ -55,7 +55,7 @@ if [[ "$1" == "--config" ]]; then
                 if [ -z "$(echo $url | grep "https://discord.com/api/webhooks/")" ]; then
                         echo ">> The link provided is not correct. Try again."; continue
                 else
-                        echo "url=$url" >> $configfile;
+                        echo "url=\"$url\"" >> $configfile;
                         break
                 fi
         done
