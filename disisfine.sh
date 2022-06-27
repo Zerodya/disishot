@@ -74,11 +74,11 @@ fi
 # Executes the actual script
 sensors | grep -e "$tempsensor" | while read line; do
 	# Get temp
-        temp=$(echo $line | awk -F "+" '{ print $2 }' | awk -F "." '{ print $1 }');
-
-        # Alert message:
+	temp=$(echo $line | awk -F "+" '{ print $2 }' | awk -F "." '{ print $1 }');
+	
+	# Alert message:
 	message="$(hostname)'s temperature is currently $temp degrees"
 	
 	# Send Discord notification
-        curl -H 'Content-type: application/json' -X POST -d "{\"content\":\"$message\"}" $url;
-        done
+	curl -H 'Content-type: application/json' -X POST -d "{\"content\":\"$message\"}" $url;
+done
