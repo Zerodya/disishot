@@ -64,6 +64,7 @@ if [[ "$1" == "--config" ]]; then
 	while true; do
 		read -p ">> Temperature treshold for when to send the alert: " treshold
                 echo "treshold=$treshold" >> $configfile;
+		break
         done
 
 	# Exits the configuration
