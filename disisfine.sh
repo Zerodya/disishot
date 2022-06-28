@@ -69,7 +69,7 @@ if [[ "$1" == "--config" ]]; then
 fi
 
 # Sources the config file
-. $configfile
+. $dir/$configfile
 
 # Executes the actual script
 sensors | grep -e "$tempsensor" | while read line; do
