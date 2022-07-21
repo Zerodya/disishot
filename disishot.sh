@@ -53,11 +53,12 @@ if [[ "$1" == "-c" ]]; then
 	sensors
 	echo -e "\n${info} These are the ones I can monitor:"
 	sensors | grep + | cut -d ":" -f1
+	echo ""
 	
 	# Add tempsensor variable
 	while true; do
 
-		echo -e "\n${msg} Which sensor should I monitor?"
+		echo -e "${msg} Which sensor should I monitor?"
 		read -p "> " tempsensor
 		if [ -z "$(sensors | grep + | cut -d ":" -f1 | grep -w "$tempsensor")" ]; then
 			echo -e "${warn} I couldn't find this sensor. Please try again."; continue
