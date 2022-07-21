@@ -97,8 +97,8 @@ if [[ "$1" == "--config" ]]; then
 				message="Test notification for $(hostname). Temperature is $temp degrees."
 				# Send test notification
 			        curl -H 'Content-type: application/json' -X POST -d "{\"content\":\"$message\"}" $url;
-			echo "${msg} Test notification sent."
 			done;
+			echo "${msg} Test notification sent.";
 			break;;
 	        [Nn]* ) break;;
 	        * ) ;;
