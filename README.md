@@ -1,9 +1,9 @@
 # 🔥 Dis is hot!
 **A bash script that sends you a Discord notification whenever your server is running too hot.**
 
-[`disishot.sh`](https://github.com/Zerodya/disishot/blob/main/disishot.sh) works by using `xsensors` to check the temperature and [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) to send the notification. To be used with `cron` to periodically check if the temperature is too high.
+[`disishot.sh`](https://github.com/Zerodya/disishot/blob/main/disishot.sh) works by using [xsensors](https://packages.debian.org/bullseye/xsensors) to check the temperature and [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) to send the notification. To be used with `cron` to periodically check if the temperature is too high.
 
-The variant [`disisfine.sh`](https://github.com/Zerodya/disishot/blob/main/disisfine.sh) works just the same but it sends a notification about the current temperature regardless of how hot the server is. Its intended use is to be able to quickly check the temperature at a glance so you better mute its Discord channel.
+The variant [`disisfine.sh`](https://github.com/Zerodya/disishot/blob/main/disisfine.sh) works just the same but sends a notification about the current temperature regardless of how hot the server is. Its intended use is to be able to quickly check the temperature at a glance so you better mute its Discord channel.
 
 ## Dependencies
 - xsensors
@@ -17,7 +17,7 @@ wget https://raw.githubusercontent.com/Zerodya/disishot/main/disishot.sh
 chmod +x disishot.sh
 ```
 
-**2.** Run the script with the `--config` parameter to create a configuration file:
+**2.** Run the script with the `--config` parameter to create a configuration file, then follow the instructions:
 ```
 ./disishot.sh --config
 ```
