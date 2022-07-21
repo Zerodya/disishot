@@ -6,7 +6,7 @@ if [[ "$(which sensors)" == "" ]]; then
 	exit 0
 fi
 
-# Check if config file exists
+# Check if configuration file exists
 configfile="disishot.conf"
 dir=$(dirname "${BASH_SOURCE[0]}")
 if [ ! -f "$dir/$configfile" ] && [[ "$1" != "--config" ]]; then
@@ -17,14 +17,29 @@ fi
 # Configuration
 if [[ "$1" == "--config" ]]; then
 
-	# Detect Ctrl-C to avoid corruption of the config file
+	export err="\033[1;31m[-]\033[m"
+	export msg="\033[1;32m[+]\033[m"
+	export warn="\033[1;33m[!]\033[m"
+	export info="\033[0;37m[:]\033[m"
+	
+	# Detect Ctrl+C to avoid corruption of the config file
 	trap ctrl_c INT
 	function ctrl_c() {
         	if [ -f "$dir/$configfile" ]; then
-                	rm $configfile
+			echo "${err} Operation aborted. Deleting configuration file."
+			rm $configfile
         	fi
         	exit 1
 	}
+	
+	# Print welcome message
+	echo "
+	  ____  _     ___     _   _       _   _ 
+	 |  _ \(_)___|_ _|___| | | | ___ | |_| |
+	 | | | | / __|| |/ __| |_| |/ _ \| __| |
+	 | |_| | \__ \| |\__ \  _  | (_) | |_|_|
+	 |____/|_|___/___|___/_| |_|\___/ \__(_)
+	                                        "
 
 	# Create config file
 	cd $dir
@@ -34,15 +49,16 @@ if [[ "$1" == "--config" ]]; then
 	touch $configfile
 
 	# Add tempsensor variable
-	echo ">> These are all the sensors available in your system:"
+	echo "${info} These are the sensors available in your system:"
 	sensors
+	echo -e "\n${info} And these are the ones I can monitor:"
+	sensors | grep + | cut -d ":" -f1
 	while true; do
-		echo -e ">> You can choose between these:"
-		sensors | grep + | cut -d ":" -f1
-		echo ""
-		read -p ">> Temperature sensor you want to monitor: " tempsensor
+
+		echo -e "\n${msg} Which sensor should I monitor?"
+		read -p "> " tempsensor
 		if [ -z "$(sensors | grep + | cut -d ":" -f1 | grep -w "$tempsensor")" ]; then
-			echo ">> This sensor was not found. Try again."; continue
+			echo "${warn} I couldn't find this sensor. Please try again."; continue
 		else
 			echo "tempsensor=\"$tempsensor\"" >> $configfile;
 			break
@@ -51,7 +67,8 @@ if [[ "$1" == "--config" ]]; then
 
 	# Add threshold variable
 	while true; do
-		read -p ">> Temperature threshold (number) for when to send the alert: " threshold
+		echo -e "${msg} After what temperature should I alert you?" 
+		read -p "> " threshold
 		echo "threshold=\"$threshold\"" >> $configfile;
 		break
         done
@@ -59,33 +76,52 @@ if [[ "$1" == "--config" ]]; then
 	
 	# Add url variable
 	while true; do
-		read -p ">> Discord webhook URL: " url
+		echo -e "${msg} What is the Discord webhook URL I should send the warnings to?" 
+		read -p "> " url
                 if [ -z "$(echo $url | grep "https://discord.com/api/webhooks/")" ]; then
-                        echo ">> The link provided is not correct. Try again."; continue
+                        echo "${warn} The link provided is not correct. Try again."; continue
                 else
                         echo "url=\"$url\"" >> $configfile;
                         break
                 fi
         done
 
+	# Ask for notification test
+	while true; do
+	    read -p "\n${msg} Configuration file created! Do you want to receive a test notification? [y/n] " yn
+	    case $yn in
+	        [Yy]* ) sensors | grep -e "$tempsensor" | while read line; do
+				# Get temp
+				temp=$(echo $line | awk -F "+" '{ print $2 }' | awk -F "." '{ print $1 }');
+				# Alert message:
+				message="Test notification for $(hostname). Temperature is $temp degrees."
+				# Send test notification
+			        curl -H 'Content-type: application/json' -X POST -d "{\"content\":\"$message\"}" $url;
+			echo "${msg} Test notification sent."
+			done
+	        [Nn]* ) break;;
+	        * ) ;;
+	    esac
+	done
+	
 	# Remind about cron
-	echo ">> It's all set! Run 'crontab -e' to run this script periodically. Here's an example of a cron job running every 5 minutes:"
+	echo -e "\n${warn} Remember to run 'crontab -e' so I can watch after your server periodically. \nHere's an example of a cron job running every 5 minutes that I prepared for you:"
 	echo "*/5 * * * * /path/to/disishot.sh"
 	
-	# Exits the configuration
+	# Exit the configuration
 	exit 0
 fi
 
 # Sources the config file
 . $dir/$configfile
 
-# Executes the actual script
+# Executes the actual monitoring script
 sensors | grep -e "$tempsensor" | while read line; do
 	# Get temp
 	temp=$(echo $line | awk -F "+" '{ print $2 }' | awk -F "." '{ print $1 }');
 	
 	# Alert message:
-	message="ALERT for $(hostname). Temperature is $temp degrees."
+	message="Alert for $(hostname). Temperature is $temp degrees. Your server is running too hot!"
 	
 	# Send Discord notification
 	if (( temp > $threshold )); then
