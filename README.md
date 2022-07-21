@@ -5,6 +5,8 @@
 
 The variant [`disisfine.sh`](https://github.com/Zerodya/disishot/blob/main/disisfine.sh) works just the same but sends a notification about the current temperature regardless of how hot the server is. Its intended use is to be able to quickly check the temperature at a glance so you better mute its Discord channel.
 
+This is what the configuration looks like:
+
 ![alt text](https://github.com/Zerodya/disishot/blob/main/configuration.png?raw=true)
 
 ## Dependencies
