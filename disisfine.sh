@@ -26,7 +26,7 @@ if [[ "$1" == "-c" ]]; then
 	trap ctrl_c INT
 	function ctrl_c() {
         	if [ -f "$dir/$configfile" ]; then
-			echo -e "${err} Operation aborted. Deleting configuration file."
+			echo -e "\n${err} Operation aborted. Deleting configuration file."
                 	rm $configfile
         	fi
         	exit 1
