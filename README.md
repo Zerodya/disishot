@@ -19,7 +19,7 @@ chmod +x disishot.sh
 
 **2.** Run the script with the `-c` parameter to create a configuration file, then follow the instructions:
 ```
-./disishot.sh --config
+./disishot.sh -c
 ```
 
 **3.** Add a line to your crontab to periodically run the script by using `crontab -e`.
