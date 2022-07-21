@@ -108,7 +108,7 @@ if [[ "$1" == "-c" ]]; then
 	
 	# Remind about cron
 	echo -e "\n${warn} Don't forget to run 'crontab -e' to execute this script periodically. Here's an example of a cron job running every 5 minutes:"
-	echo -e "\033[0;36m*/5 * * * * /path/to/disishot.sh"
+	echo -e "\033[0;36m*/5 * * * * /path/to/disishot.sh\033[m"
 	
 	# Exit the configuration
 	exit 0
