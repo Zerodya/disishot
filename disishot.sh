@@ -98,7 +98,8 @@ if [[ "$1" == "--config" ]]; then
 				# Send test notification
 			        curl -H 'Content-type: application/json' -X POST -d "{\"content\":\"$message\"}" $url;
 			echo "${msg} Test notification sent."
-			done
+			done;
+			break;;
 	        [Nn]* ) break;;
 	        * ) ;;
 	    esac
