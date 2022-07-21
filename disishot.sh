@@ -10,23 +10,23 @@ fi
 configfile="disishot.conf"
 dir=$(dirname "${BASH_SOURCE[0]}")
 if [ ! -f "$dir/$configfile" ] && [[ "$1" != "--config" ]]; then
-    echo "Config file not found. Run again with the '--config' option to generate one in the current path."
+    echo "Config file not found. Run again with the '-c' parameter to generate one in the current path."
     exit 0
 fi
 
 # Configuration
-if [[ "$1" == "--config" ]]; then
+if [[ "$1" == "-c" ]]; then
 
 	export err="\033[1;31m[-]\033[m"
 	export msg="\033[1;32m[+]\033[m"
 	export warn="\033[1;33m[!]\033[m"
-	export info="\033[0;37m[:]\033[m"
+	export info="\033[0;36m[:]\033[m"
 	
 	# Detect Ctrl+C to avoid corruption of the config file
 	trap ctrl_c INT
 	function ctrl_c() {
         	if [ -f "$dir/$configfile" ]; then
-			echo "${err} Operation aborted. Deleting configuration file."
+			echo -e "${err} Operation aborted. Deleting configuration file."
 			rm $configfile
         	fi
         	exit 1
@@ -49,7 +49,7 @@ if [[ "$1" == "--config" ]]; then
 	touch $configfile
 
 	# Add tempsensor variable
-	echo "${info} These are the sensors available in your system:"
+	echo -e "${info} These are the sensors available in your system:"
 	sensors
 	echo -e "\n${info} And these are the ones I can monitor:"
 	sensors | grep + | cut -d ":" -f1
@@ -58,7 +58,7 @@ if [[ "$1" == "--config" ]]; then
 		echo -e "\n${msg} Which sensor should I monitor?"
 		read -p "> " tempsensor
 		if [ -z "$(sensors | grep + | cut -d ":" -f1 | grep -w "$tempsensor")" ]; then
-			echo "${warn} I couldn't find this sensor. Please try again."; continue
+			echo -e "${warn} I couldn't find this sensor. Please try again."; continue
 		else
 			echo "tempsensor=\"$tempsensor\"" >> $configfile;
 			break
@@ -79,7 +79,7 @@ if [[ "$1" == "--config" ]]; then
 		echo -e "${msg} What is the Discord webhook URL I should send the warnings to?" 
 		read -p "> " url
                 if [ -z "$(echo $url | grep "https://discord.com/api/webhooks/")" ]; then
-                        echo "${warn} The link provided is not correct. Try again."; continue
+                        echo -e "${warn} The link provided is not correct. Try again."; continue
                 else
                         echo "url=\"$url\"" >> $configfile;
                         break
@@ -98,7 +98,7 @@ if [[ "$1" == "--config" ]]; then
 				# Send test notification
 			        curl -H 'Content-type: application/json' -X POST -d "{\"content\":\"$message\"}" $url;
 			done;
-			echo "${msg} Test notification sent.";
+			echo -e "${msg} Test notification sent.";
 			break;;
 	        [Nn]* ) break;;
 	        * ) ;;
@@ -106,8 +106,8 @@ if [[ "$1" == "--config" ]]; then
 	done
 	
 	# Remind about cron
-	echo -e "\n${warn} Remember to run 'crontab -e' so I can watch after your server periodically. \nHere's an example of a cron job running every 5 minutes that I prepared for you:"
-	echo "*/5 * * * * /path/to/disishot.sh"
+	echo -e "\n${warn} Don't forget to run 'crontab -e' to execute this script periodically. Here's an example of a cron job running every 5 minutes:"
+	echo "\033[0;36m*/5 * * * * /path/to/disishot.sh"
 	
 	# Exit the configuration
 	exit 0
