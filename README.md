@@ -17,7 +17,7 @@ wget https://raw.githubusercontent.com/Zerodya/disishot/main/disishot.sh
 chmod +x disishot.sh
 ```
 
-**2.** Run the script with the `--config` parameter to create a configuration file, then follow the instructions:
+**2.** Run the script with the `-c` parameter to create a configuration file, then follow the instructions:
 ```
 ./disishot.sh --config
 ```
