@@ -88,7 +88,8 @@ if [[ "$1" == "-c" ]]; then
 
 	# Ask for notification test
 	while true; do
-	    read -p "\n${msg} Configuration file created! Do you want to receive a test notification? [y/n] " yn
+	    echo -e "\n${msg} Configuration file created! Do you want to receive a test notification? [y/n] " 
+	    read -p "> " yn
 	    case $yn in
 	        [Yy]* ) sensors | grep -e "$tempsensor" | while read line; do
 				# Get temp
@@ -107,7 +108,7 @@ if [[ "$1" == "-c" ]]; then
 	
 	# Remind about cron
 	echo -e "\n${warn} Don't forget to run 'crontab -e' to execute this script periodically. Here's an example of a cron job running every 5 minutes:"
-	echo "\033[0;36m*/5 * * * * /path/to/disishot.sh"
+	echo -e "\033[0;36m*/5 * * * * /path/to/disishot.sh"
 	
 	# Exit the configuration
 	exit 0
