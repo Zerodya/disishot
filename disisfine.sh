@@ -17,10 +17,10 @@ fi
 # Configuration
 if [[ "$1" == "-c" ]]; then
 
-        export err="\033[1;31m[-]\033[m"
-        export msg="\033[1;32m[+]\033[m"
-        export warn="\033[1;33m[!]\033[m"
-        export info="\033[0;36m[:]\033[m"
+	export err="\033[1;31m[-]\033[m"
+	export msg="\033[1;32m[+]\033[m"
+	export warn="\033[1;33m[!]\033[m"
+	export info="\033[0;36m[:]\033[m"
 	
 	# Detect Ctrl+C to avoid corruption of the config file
 	trap ctrl_c INT
