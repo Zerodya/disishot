@@ -9,7 +9,7 @@ fi
 # Check if configuration file exists
 configfile="disishot.conf"
 dir=$(dirname "${BASH_SOURCE[0]}")
-if [ ! -f "$dir/$configfile" ] && [[ "$1" != "--config" ]]; then
+if [ ! -f "$dir/$configfile" ] && [[ "$1" != "-c" ]]; then
     echo "Config file not found. Run again with the '-c' parameter to generate one in the current path."
     exit 0
 fi
