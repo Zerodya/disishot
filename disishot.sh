@@ -48,11 +48,13 @@ if [[ "$1" == "-c" ]]; then
 	fi
 	touch $configfile
 
-	# Add tempsensor variable
+	# Show available sensors
 	echo -e "${info} These are the sensors available in your system:"
 	sensors
 	echo -e "\n${info} These are the ones I can monitor:"
 	sensors | grep + | cut -d ":" -f1
+	
+	# Add tempsensor variable
 	while true; do
 
 		echo -e "\n${msg} Which sensor should I monitor?"
