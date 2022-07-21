@@ -51,7 +51,7 @@ if [[ "$1" == "-c" ]]; then
 	# Add tempsensor variable
 	echo -e "${info} These are the sensors available in your system:"
 	sensors
-	echo -e "\n${info} And these are the ones I can monitor:"
+	echo -e "\n${info} These are the ones I can monitor:"
 	sensors | grep + | cut -d ":" -f1
 	while true; do
 
@@ -67,7 +67,7 @@ if [[ "$1" == "-c" ]]; then
 
 	# Add threshold variable
 	while true; do
-		echo -e "${msg} After what temperature should I alert you?" 
+		echo -e "${msg} What is the temperature treshold on which you want to be notified?" 
 		read -p "> " threshold
 		echo "threshold=\"$threshold\"" >> $configfile;
 		break
@@ -76,7 +76,7 @@ if [[ "$1" == "-c" ]]; then
 	
 	# Add url variable
 	while true; do
-		echo -e "${msg} What is the Discord webhook URL I should send the warnings to?" 
+		echo -e "${msg} What is the Discord webhook URL I should send the alerts to?" 
 		read -p "> " url
                 if [ -z "$(echo $url | grep "https://discord.com/api/webhooks/")" ]; then
                         echo -e "${warn} The link provided is not correct. Try again."; continue
