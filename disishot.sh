@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if dependencies are installed
-if [[ "$(which sensors)" == "" ]]; then
+if [[ "$(command -v sensors)" == "" ]]; then
 	echo "Missing package 'xsensors'. Please install it before proceeding."
 	exit 0
 fi
