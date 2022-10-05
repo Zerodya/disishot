@@ -32,3 +32,6 @@ Example of a cron job running every 5 minutes:
 ```
 */5 * * * * /path/to/disishot.sh
 ```
+***
+### TO DO:
+- During the intial setup, choose the sensor with numbers instead of typing the whole word
