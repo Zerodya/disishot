@@ -21,10 +21,11 @@ wget https://raw.githubusercontent.com/Zerodya/disishot/main/disishot.sh
 chmod +x disishot.sh
 ```
 
-**2.** Run the script with the `-c` parameter to create a configuration file, then follow the instructions:
+**2.** Run the script with the `-c` parameter to create a configuration file:
 ```
 ./disishot.sh -c
 ```
+Follow the instructions.
 
 **3.** Add a line to your crontab to periodically run the script by using `crontab -e`.
 
@@ -35,3 +36,4 @@ Example of a cron job running every 5 minutes:
 ***
 ### TO DO:
 - During the intial setup, choose the sensor with numbers instead of typing the whole word
+- Choose configuration file path
